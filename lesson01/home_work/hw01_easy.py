@@ -1,4 +1,3 @@
-
 __author__ = 'Целищев Александр Сергеевич'
 print('\nAuthor: ',__author__ )
 print("\n==========")
@@ -10,10 +9,14 @@ print("* при желании решите задачу с применение
 print("==========\n")
 
 #1st
-a = str(int(input("Write your random integer number:")))
-#int - чтобы отсечь дробную часть, если пользователь ввел дробное.
+try:
+    num = int(input("Write your random integer number:"))
+except:
+    print("Вы ввели не число.")
+
+a = str(num)
 z = len(a)
-x=0
+x = 0
 while x < z:
     print(a[x], end='')
     x += 1
