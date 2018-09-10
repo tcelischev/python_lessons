@@ -11,8 +11,28 @@ print(" Задача-1:")
 # если такой корень вообще можно извлечь
 # Пример: Дано: [2, -5, 8, 9, -25, 25, 4]   Результат: [3, 5, 2]
 # ====================================
+print('Задача №1. sqrt')
 
+num = int(randint(10, 30))
+a = [25]
+for i in range(num):
+    a.append(randint(-100, 100))
 
+print('List a = ', end=' ')
+for i in range(num):
+    print('{0:3d}|'.format(a[i]), end='')
+
+b = []
+for i in range(num):
+    if a[i]>= 0 and (a[i]**0.5) % 1 == 0:
+        b.append(a[i])
+
+print('')
+print('List a (sqrt) = ', end=' ')
+for i in range(len(b)):
+    print('{0:3d}|'.format(b[i]), end='')
+
+input("\nPress [enter] for next task")
 
 print("\n==========")
 print(" Задача-2: date in text")
@@ -41,7 +61,7 @@ monz = ['января', 'февраля', 'марта', 'апреля', 'мая'
 print(dayz[int(date_separated[2])-1] + ' ' + monz[int(date_separated[1])-1] + ' ' + date_separated[0] + ' года')
 
 
-
+input("Press [enter] for next task")
 print("\n==========")
 print('Задача-3: Randomizer (-100:100)')
 # Задача-3: Напишите алгоритм, заполняющий список произвольными целыми числами
