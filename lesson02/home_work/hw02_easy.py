@@ -1,5 +1,6 @@
 from random import randint
 import copy
+
 __author__ = 'Целищев Александр Сергеевич'
 print('\nAuthor: ',__author__ )
 print("\n==========")
