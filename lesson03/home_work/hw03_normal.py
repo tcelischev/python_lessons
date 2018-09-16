@@ -44,6 +44,16 @@ sort_to_max(bb)
 # Разумеется, внутри нельзя использовать саму функцию filter.
 #==== сделаю позже +++++++.
 
+i = ['1' , '2' , '3' , '4']
+
+def my_filter(what, where):
+    new = [string for string in where if what(where)]
+    return new
+
+def superfunc(*args):
+    return args % 2 == 0
+
+print(my_filter(superfunc,i))
 
 
 # Задача-4:
