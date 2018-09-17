@@ -68,15 +68,6 @@ line_2 = ['mtMmEZUOmcqWiryMQhhTxqKdSTKCYEJlEZCsGAMkgAYEOmHBSQsSUHKvSfbmxULaysm'\
 '''
 
 print('Задание-3:')
-#path = os.path.curdir
-with open('Digits2500.txt', 'w', encoding='UTF-8') as fw:
-    try:
-        for lines in fw:
-            fw.write(rand_generator(0) + '\n')
-        print(fw.readlines())
-    except:
-           print('File is empty')
-
 
 def rand_generator(num):
        ''' генерирует случайное число заданной длины. по умолчанию длина = 2500
@@ -86,13 +77,40 @@ def rand_generator(num):
        new_list = [int(random.uniform(0, 1)*10) for _ in range(num or 2500)]
        output_num = ''.join(map(str, new_list))
        return output_num
+rg = rand_generator
 
-print(rand_generator(0))
+def max_sequence(line):
+    print(line)
+    k = 1
+    f = [1]*len(line)
 
-'''
+    max_line = {key: value for key, value in enumerate(line)}
+    #max_line = dict.fromkeys(enumerate(line))
+    print(max_line)
+    for i in line:
+        while line[i] == line[i + k]:
+            max_line[line(i)] = k
+            k += 1
+        k = 1
+    return max_line
+
+max_sequence('234234574955788884844477939393935757520')
+
+#path = os.path.curdir
+
+with open('Digits2500.txt', 'w+', encoding='UTF-8') as fw:
+    try:
+        fw.write(rg(0))
+        print('\nWrite successful.')
+    except:
+        print('Nothing to write')
+
+with open('Digits2500.txt', 'r', encoding='UTF-8') as fr:
+    try:
+        print(fr.readlines())
+    except:
+        print('File is empty')
 
 
-path = os.path.curdir
-print(path + '\\Digits2500.txt')
 
-'''
+print(rg(0))
