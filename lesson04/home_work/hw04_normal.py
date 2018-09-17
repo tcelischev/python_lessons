@@ -71,6 +71,25 @@ print('Задание-3:')
 
 file_name = 'Digits2500.txt'
 
+
+def max_sequence(line):
+    prev = line[0]
+    max_len = 1
+    current_len = 1
+    max_line = [prev, max_len]
+    for i in range(1, len(line)+1):
+        if line[i] == prev:
+            current_len += 1
+        elif current_len >= max_len:
+            max_line = [prev, current_len]
+            prev = line[i-1]
+            max_len = current_len
+            current_len = 1
+            return max_line
+        else:
+            current_len = 1
+    return max_line
+
 def create_file_xdigits(func, x):
     '''создаем файл в текущей дирректории. Записываем в него значения функции'''
     with open('Digits2500.txt', 'w+', encoding='UTF-8') as fw:
@@ -83,12 +102,12 @@ def create_file_xdigits(func, x):
 def open_file(file_name):
     '''открывает файл из текущей дирректории. Имя файла должно быть строковое'''
     with open(file_name, 'r', encoding='UTF-8') as fr:
-        try:
-            x = list(map(int, fr.readlines()))
-            print(x)
-            print(max_sequence(x))
-        except:
-            print('Can\'t read file')
+        # try:
+        x = list(map(int, fr.readline()))
+        print(x)
+        print(max_sequence(x))
+        # except:
+        #     print('Can\'t read file')
 
 def rand_generator(num):
     ''' генерирует случайное число заданной длины. по умолчанию длина = 2500
@@ -104,22 +123,6 @@ create_file_xdigits(rg, 25)
 open_file(file_name)
 
 
-def max_sequence(line):
-    prev = line[0]
-    max_len = 1
-    current_len = 1
-    max_line = (line[0], max_len)
-    for i in range(1, len(line)):
-        if line[i] == prev:
-            current_len += 1
-        elif current_len > max_len:
-            max_line = [prev, current_len]
-            prev = line[i]
-            max_len = current_len
-            current_len = 1
-        else:
-            current_len = 1
-    return max_line
 
 
 def max_sequence_re(pattern, line):
