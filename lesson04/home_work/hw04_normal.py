@@ -8,7 +8,7 @@ import re
 # Т.е. из строки "mtMmEZUOmcq" нужно получить ['mt', 'm', 'mcq']
 # Решить задачу двумя способами: с помощью re и без.
 
-line = ['mtMmEZUOmcqWiryMQhhTxqKdSTKCYEJlEZCsGAMkgAYEOmHBSQsSUHKvSfbmxULaysmNO'\
+line_1 = ['mtMmEZUOmcqWiryMQhhTxqKdSTKCYEJlEZCsGAMkgAYEOmHBSQsSUHKvSfbmxULaysmNO'\
        'GIPHpEMujalpPLNzRWXfwHQqwksrFeipEUlTLeclMwAoktKlfUBJHPsnawvjPhfgewVzK'\
        'TUfSYtBydXaVIpxWjNKgXANvIoumesCSSvjEGRJosUfuhRRDUuTQwLlJJJDdkVjfSAHqn'\
        'LxooisBDWuxIhyjJaXDYwdoVPnsllMngNlmkpYOlqXEFIxPqqqgAWdJsOvqppOfyIVjXa'\
@@ -25,7 +25,7 @@ line = ['mtMmEZUOmcqWiryMQhhTxqKdSTKCYEJlEZCsGAMkgAYEOmHBSQsSUHKvSfbmxULaysmNO'\
        'zTYwZAiRwycdlHfyHNGmkNqSwXUrxGc']
 #print(line)
 #isupper islower
-
+#  '[a-z]+'
 
 
 # Задание-2:
@@ -69,48 +69,71 @@ line_2 = ['mtMmEZUOmcqWiryMQhhTxqKdSTKCYEJlEZCsGAMkgAYEOmHBSQsSUHKvSfbmxULaysm'\
 
 print('Задание-3:')
 
+file_name = 'Digits2500.txt'
+
+def create_file_xdigits(func, x):
+    '''создаем файл в текущей дирректории. Записываем в него значения функции'''
+    with open('Digits2500.txt', 'w+', encoding='UTF-8') as fw:
+        try:
+            fw.write(func(x))
+            print('\nWrite successful.')
+        except:
+            print('Nothing to write')
+
+def open_file(file_name):
+    '''открывает файл из текущей дирректории. Имя файла должно быть строковое'''
+    with open(file_name, 'r', encoding='UTF-8') as fr:
+        try:
+            x = list(map(int, fr.readlines()))
+            print(x)
+            print(max_sequence(x))
+        except:
+            print('Can\'t read file')
+
 def rand_generator(num):
-       ''' генерирует случайное число заданной длины. по умолчанию длина = 2500
-       :param num: параметр длины числа. по умолчанию 2500
-       :return: возвращаем число в виде строки.
-       '''
-       new_list = [int(random.uniform(0, 1)*10) for _ in range(num or 2500)]
-       output_num = ''.join(map(str, new_list))
-       return output_num
+    ''' генерирует случайное число заданной длины. по умолчанию длина = 2500
+    :param num: параметр длины числа. по умолчанию 2500
+    :return: возвращаем число в виде строки.
+    '''
+    new_list = [int(random.uniform(0, 1) * 10) for _ in range(num or 2500)]
+    output_num = ''.join(map(str, new_list))
+    return output_num
 rg = rand_generator
 
-def max_sequence(line):
-    print(line)
-    k = 1
-    f = [1]*len(line)
+create_file_xdigits(rg, 25)
+open_file(file_name)
 
-    max_line = {key: value for key, value in enumerate(line)}
-    #max_line = dict.fromkeys(enumerate(line))
-    print(max_line)
-    for i in line:
-        while line[i] == line[i + k]:
-            max_line[line(i)] = k
-            k += 1
-        k = 1
+
+def max_sequence(line):
+    prev = line[0]
+    max_len = 1
+    current_len = 1
+    max_line = (line[0], max_len)
+    for i in range(1, len(line)):
+        if line[i] == prev:
+            current_len += 1
+        elif current_len > max_len:
+            max_line = [prev, current_len]
+            prev = line[i]
+            max_len = current_len
+            current_len = 1
+        else:
+            current_len = 1
     return max_line
 
-max_sequence('234234574955788884844477939393935757520')
 
-#path = os.path.curdir
-
-with open('Digits2500.txt', 'w+', encoding='UTF-8') as fw:
-    try:
-        fw.write(rg(0))
-        print('\nWrite successful.')
-    except:
-        print('Nothing to write')
-
-with open('Digits2500.txt', 'r', encoding='UTF-8') as fr:
-    try:
-        print(fr.readlines())
-    except:
-        print('File is empty')
+def max_sequence_re(pattern, line):
+    pattern_line = re.findall(pattern, line)
+    return pattern_line
 
 
-
-print(rg(0))
+# тест
+test_line = '2222444477776556565677777770'
+# a = list(map(int, test_line))
+# print(type(a))
+# print(a)
+#max_sequence(rg(25))
+#pattern = (r'.*\d{2,}+?')
+pattern = (r'\d{2,}')
+print('max_sequence_re: ', max_sequence_re(pattern, rg(15)))
+print('max_sequence: ', max_sequence(test_line))
