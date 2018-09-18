@@ -92,7 +92,7 @@ def max_sequence(line):
 
 def create_file_xdigits(func, x):
     '''создаем файл в текущей дирректории. Записываем в него значения функции'''
-    with open('Digits2500.txt', 'w+', encoding='UTF-8') as fw:
+    with open(file_name, 'w+', encoding='UTF-8') as fw:
         try:
             fw.write(func(x))
             print('\nWrite file successful.')
