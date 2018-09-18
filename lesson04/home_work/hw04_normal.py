@@ -77,17 +77,17 @@ def max_sequence(line):
     max_len = 1
     current_len = 1
     max_line = [prev, max_len]
-    for i in range(1, len(line)+1):
+    for i in range(1, len(line)):
         if line[i] == prev:
             current_len += 1
-        elif current_len >= max_len:
+        elif current_len > max_len:
             max_line = [prev, current_len]
-            prev = line[i-1]
+            prev = line[i]
             max_len = current_len
             current_len = 1
-            return max_line
         else:
             current_len = 1
+            prev = line[i]
     return max_line
 
 def create_file_xdigits(func, x):
@@ -95,7 +95,7 @@ def create_file_xdigits(func, x):
     with open('Digits2500.txt', 'w+', encoding='UTF-8') as fw:
         try:
             fw.write(func(x))
-            print('\nWrite successful.')
+            print('\nWrite file successful.')
         except:
             print('Nothing to write')
 
@@ -119,7 +119,7 @@ def rand_generator(num):
     return output_num
 rg = rand_generator
 
-create_file_xdigits(rg, 25)
+create_file_xdigits(rg, 0)
 open_file(file_name)
 
 
@@ -131,12 +131,13 @@ def max_sequence_re(pattern, line):
 
 
 # тест
-test_line = '2222444477776556565677777770'
+print('\n====test====')
+test_line = '2222444455555556556565677777770'
 # a = list(map(int, test_line))
 # print(type(a))
 # print(a)
 #max_sequence(rg(25))
 #pattern = (r'.*\d{2,}+?')
-pattern = (r'\d{2,}')
-print('max_sequence_re: ', max_sequence_re(pattern, rg(15)))
+#pattern = (r'\d{2,}')
+#print('max_sequence_re: ', max_sequence_re(pattern, rg(15)))
 print('max_sequence: ', max_sequence(test_line))
