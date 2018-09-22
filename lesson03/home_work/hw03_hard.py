@@ -19,6 +19,12 @@
 # Кол-во часов, которые были отработаны, указаны в файле "data/hours_of"
 
 
+with open('data/workers') as f:
+    f.readline() #пропустим первую
+    for line in f:
+        data = line.split()
+        salaries[' '.join((data[0], data[1]))] = (int(data[2])), int(data[2]))
+
 # Задание-3:
 # Дан файл ("data/fruits") со списком фруктов.
 # Записать в новые файлы все фрукты, начинающиеся с определенной буквы.
